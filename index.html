@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOT</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
+    <script>
+        $(document).ready(function() {
+            $("img").click(function() {
+                var id = $(this).attr("id");
+                var datos = "";
+                $.get("https://anapioficeandfire.com/api/houses/" + id + "/", function(res) {
+                    datos += "<h4> Name: <br> " + res.name + "</h4><br>";
+                    datos += "<h4> Titles:  <ul>";
+                    for (var i = 0; i < res.titles.length; i++) {
+                        datos += "<li>" + res.titles[i] + "</li>";
+                    }
+                    datos += "<ul> </h4>";
+                    datos += "<h4> Words: <br> " + res.words + "</h4><br>";
+                    $("#header").html(datos);
+                }, "json");
+            });
+        });
+    </script>
+    <style>
+        body {
+            background-color: black;
+            ;
+        }
+        
+        #header {
+            padding: 50px;
+            border: 5px white solid;
+            background-color: black;
+            text-align: center;
+            color: rgb(233, 233, 233);
+            font-family: 'Cinzel', serif;
+        }
+        
+        img {
+            border: 5px white solid;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="jumbotron text-center" id="header">
+        <h1>HOUSES OF GAME OF THRONES</h1>
+        <h1 id="name"></h1>
+        <p id="titles"></p>
+        <p id="words"></p>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <img id="17" src="baratheon.png">
+            </div>
+            <div class="col-sm-3">
+                <img id="229" src="lannister.jpg">
+            </div>
+            <div class="col-sm-3">
+                <img id="378" src="targaryen.jpg">
+            </div>
+            <div class="col-sm-3">
+                <img id="362" src="stark.jpg">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
